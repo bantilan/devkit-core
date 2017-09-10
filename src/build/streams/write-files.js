@@ -31,8 +31,8 @@ exports.create = function (api, app, config) {
             .wrap(api.streams.createFileStream({
               onFile: function (file) {
                 if (file.stat && file.stat.atime && file.stat.mtime) {
-                  var atime = new Date();
-                  var mtime = new Date();
+                  var atime = file.stat.atime;
+                  var mtime = file.stat.mtime;
                   if (!isNaN(atime) && !isNaN(mtime)) {
                     return fs.utimesAsync(file.path, atime, mtime);
                   }
